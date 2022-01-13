@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnStart;
     String st;
     String[] array = new String[]{"피자", "떡볶이", "치킨", "닭볶음탕", "부대찌개","삼겹살","갈비찜","초밥","순대국밥"};
-    // Button btn;
-    // int randomnum, c = 0;
 
+    // 문장? 단어? 이거 합의해야 할듯. 조금 더 적당한 걸로...
     String[] strings = new String[] { // 배열을 여기서 초기화해서 하드코딩! // 현재 22개
             "닭 콩팥 훔친 집사",
             "물컵 속 팥 찾던 형",
@@ -54,45 +53,16 @@ public class MainActivity extends AppCompatActivity {
             "가느다란 몸 부수어 쥔 총칼, 터 평화"
     };
 
-    /*
-    // 스레드 무한반복
-    Thread my = new Thread() {
-        public void run() {
-            while (true) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        et.setText("");
-                        // randomnum = rand.nextInt(22);
-                        // System.out.println(randomnum);
-                        // tv.setText(strings[randomnum]); // 랜덤 범위: 0~21, 배열 원소 개수에 맞게 맞춰주기!
-                        st = strings[rand.nextInt(22)];
-                        tv.setText(st); // 랜덤 범위: 0~21, 배열 원소 개수에 맞게 맞춰주기!
-                    }
-                });
-                try {
-                    Thread.sleep(10000); // 출력 주기 설정. 합칠때 꼭 맞출 것! // 10초
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                } catch (Exception ex) {
-                    System.out.println("Error");
-                }
-            } // while end
-        } // run end
-    }; // my end
-     */
-
-    // 글자 맞췄을 때 새로운 문자열로 불러오는 부분이 Thread로 어려워서 부득이하게 변경...
     Handler hand = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
+                // 핸들러에 조건문을 줘서 정지 버튼이 작동되도록 만들어줘야 함
                 et.setText("");
                 st = strings[rand.nextInt(22)];
                 tv.setText(st); // 랜덤 범위: 0~21, 배열 원소 개수에 맞게 맞춰주기!
             }
-            // Thread 사용 없이 handler 호출할때 delayMillis를 전달하는 것만으로 구현이 가능
-            hand.sendEmptyMessageDelayed(1, 60000); // while 무한루프 기술 X // 출력 주기 설정. 합칠때 꼭 맞출 것! // 60초
+            hand.sendEmptyMessageDelayed(1, 60000); // 출력 주기 설정. 합칠때 꼭 맞출 것! // 60초
         } // handleMessage end
     }; // hand end
 
@@ -105,17 +75,12 @@ public class MainActivity extends AppCompatActivity {
         tv = findViewById(R.id.textview);
         et = findViewById(R.id.edittext);
 
-        //게임시작버튼
+        // 게임 시작 버튼
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vw) {
                 hand.sendEmptyMessage(1);
-                // my.start();
-
-                // 이하 스레드/핸들러에서 처리하는 구문
-                // st=array[(int)(Math.random()*8)] ;
-                // tv.setText(st);
-            }// end
+            } // end
         });
 
         et.addTextChangedListener(new TextWatcher() {
@@ -131,13 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 if (et.getText().toString().equals(st)) {
                     Toast.makeText(MainActivity.this, "정답!", Toast.LENGTH_SHORT).show(); // 토스트 표출
                     hand.sendEmptyMessage(1);
-                    // et.setText(""); // 글자 지우기
-
-                    // onDestroy(); // 스레드 멈추고
-                    // my.start(); // 스레드 다시 시작
-                    // tv.setText(strings[rand.nextInt(22)]);
-                    // st = array[(int) (Math.random() * 8)];
-                    // tv.setText(st);
                 }
             }
 
