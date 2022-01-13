@@ -8,34 +8,73 @@
     >
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="제한시간 60초"
+        android:textAlignment="center"
+        android:textSize="10pt" />
+
+    <Chronometer
+        android:id="@+id/chronoAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10pt"
+        android:layout_gravity="center"
+        android:format="경과시간:%s"
+        />
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="점수"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textSize="10pt"/>
+
+    <TextView
         android:id="@+id/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="게임을 시작합니다!"
+        android:layout_margin="10dp"
+        android:text="\n게임을 시작합니다!"
         android:textSize="14pt" />
 
     <EditText
         android:id="@+id/edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100px"/>
+        android:layout_marginBottom="100dp"
+        />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginTop="200px"
+        android:orientation="vertical"
         >
 
         <Button
-            android:id="@+id/button"
-            android:layout_gravity="center"
+            android:id="@+id/btnStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="게임 시작" />
-
+            android:text="게임 시작"
+            android:textSize="10pt"
+            android:layout_gravity="center"
+            android:onClick="monClick"
+            />
+        <Button
+            android:id="@+id/btnEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게임 종료"
+            android:textSize="10pt"
+            android:layout_gravity="center"
+            android:onClick="monClick"
+            />
     </LinearLayout>
 </LinearLayout>
