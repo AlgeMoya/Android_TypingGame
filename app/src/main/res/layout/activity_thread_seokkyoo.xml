@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Hello World!"
+        android:text="게임을 시작합니다!"
         android:textSize="16pt" />
 
     <EditText
@@ -35,7 +35,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="시작" />
+            android:text="게임 시작" />
 
     </LinearLayout>
 </LinearLayout>
