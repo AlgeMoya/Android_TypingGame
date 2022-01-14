@@ -8,10 +8,11 @@
     >
 
     <TextView
+        android:id="@+id/tvStage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="제한시간 60초"
+        android:text=""
         android:textAlignment="center"
         android:textSize="10pt" />
 
@@ -40,13 +41,13 @@
         android:gravity="center_horizontal"
         android:layout_margin="10dp"
         android:text="\n게임을 시작합니다!"
-        android:textSize="14pt" />
+        android:textSize="12pt" />
 
     <EditText
         android:id="@+id/edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
         />
 
 
@@ -76,5 +77,15 @@
             android:layout_gravity="center"
             android:onClick="monClick"
             />
+        <Button
+            android:id="@+id/btnHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게임 방법"
+            android:textSize="10pt"
+            android:layout_gravity="center"
+            android:onClick="monClick"
+            />
     </LinearLayout>
+
 </LinearLayout>
