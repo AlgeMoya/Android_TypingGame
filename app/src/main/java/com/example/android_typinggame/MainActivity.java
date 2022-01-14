@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     et.setText("");
                     st = strings2[rand.nextInt(strings2.length)];
                     tv.setText(st);
-                } else if ((sCurrentTime.equals("경과시간:00:30") && stage == 1 && score3 <= 7) || (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score3 <= 4) || (sCurrentTime.equals("경과시간:01:30") && stage == 3)) {
+                } else if ((sCurrentTime.equals("경과시간:00:30") && stage == 1 && score1 <= 7) || (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score2 <= 4) || (sCurrentTime.equals("경과시간:01:30") && stage == 3)) {
                     chrono.stop();
                     gaming = false;
                     tv.setText("게임이 끝났습니다!");
