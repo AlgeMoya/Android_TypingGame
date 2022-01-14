@@ -82,9 +82,8 @@ public class MainActivity extends AppCompatActivity {
         chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                //제한시간 01:00 (1분)
                 String sCurrentTime = chronometer.getText().toString();
-                if (sCurrentTime.equals("경과시간:00:30") && stage == 1 && score1 >= 8) { // 8점 이상
+                if (sCurrentTime.equals("경과시간:00:30") && stage == 1 && score1 >= 8) { // 30초, 1단계, 8점 이상
                     stage = 2;
                     tvStage.setText("2단계 : 짧은 문장");
                     tvScore.setText(String.format("2단계 점수: " + score2 + "점 / 총점 : " + scoretotal));
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     et.setText("");
                     st = strings1[rand.nextInt(strings1.length)];
                     tv.setText(st);
-                } else if (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score2 >= 5) { // 5점 이상
+                } else if (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score2 >= 5) { // 60초, 2단계, 5점 이상
                     stage = 3;
                     tvStage.setText("3단계 : 긴 문장");
                     tvScore.setText(String.format("3단계 점수: " + score3 + "점 / 총점 : " + scoretotal));
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     et.setText("");
                     st = strings2[rand.nextInt(strings2.length)];
                     tv.setText(st);
-                } else if (sCurrentTime.equals("경과시간:00:30") && stage == 1 && score3 <= 7) { // 3점 이하
+                } else if ((sCurrentTime.equals("경과시간:00:30") && stage == 1 && score3 <= 7) || (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score3 <= 4) || (sCurrentTime.equals("경과시간:01:30") && stage == 3)) {
                     chrono.stop();
                     gaming = false;
                     tv.setText("게임이 끝났습니다!");
@@ -111,26 +110,6 @@ public class MainActivity extends AppCompatActivity {
                     chrono.setTextColor(Color.BLACK);
                     btnStart.setVisibility(View.VISIBLE);
                     Toast ts = Toast.makeText(getApplicationContext(),"게임이 끝났습니다!", Toast.LENGTH_SHORT);
-                    ts.show();
-                } else if (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score3 <= 4) { // 4점 이하
-                    chrono.stop();
-                    gaming = false;
-                    tv.setText("게임이 끝났습니다!");
-                    stage = 0;
-                    tvScore.setTextColor(Color.GRAY);
-                    chrono.setTextColor(Color.BLACK);
-                    btnStart.setVisibility(View.VISIBLE);
-                    Toast ts = Toast.makeText(getApplicationContext(), "게임이 끝났습니다!", Toast.LENGTH_SHORT);
-                    ts.show();
-                } else if (sCurrentTime.equals("경과시간:01:30") && stage == 3) { // 5점 이하 // 3단게에서는 그냥 강제종료
-                    chrono.stop();
-                    gaming = false;
-                    tv.setText("게임이 끝났습니다!");
-                    stage = 0;
-                    tvScore.setTextColor(Color.GRAY);
-                    chrono.setTextColor(Color.BLACK);
-                    btnStart.setVisibility(View.VISIBLE);
-                    Toast ts = Toast.makeText(getApplicationContext(), "게임이 끝났습니다!", Toast.LENGTH_SHORT);
                     ts.show();
                 }
             }
