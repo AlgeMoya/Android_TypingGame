@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     boolean gaming = false; //게임 진행상태
     String st, msg;
 
-    String[] words = new String[] {"피자", "떡볶이", "치킨", "닭볶음탕", "부대찌개","삼겹살","갈비찜","초밥","순대국밥"};
+    String[] words = new String[] {"피자", "떡볶이", "치킨", "닭볶음탕", "부대찌개", "삼겹살", "갈비찜","초밥","순대국밥", "비빔국수", "만두", "찜닭", "누룽지통닭", "냉면", "까르보나라", "카레", "배추김치", "숭늉", "식혜"};
 
     String[] strings1 = new String[] { // 배열을 여기서 초기화해서 하드코딩! // 현재 8개
             "그 맑은 눈빛으로 나를 씻어",
@@ -84,35 +84,41 @@ public class MainActivity extends AppCompatActivity {
             public void onChronometerTick(Chronometer chronometer) {
                 //제한시간 01:00 (1분)
                 String sCurrentTime = chronometer.getText().toString();
-                if (sCurrentTime.equals("경과시간:00:30") && stage == 1 && score1 > 4) { // 5점 이상
+                if (sCurrentTime.equals("경과시간:00:30") && stage == 1 && score1 >= 8) { // 8점 이상
                     stage = 2;
                     tvStage.setText("2단계 : 짧은 문장");
+                    tvScore.setText(String.format("2단계 점수: " + score2 + "점 / 총점 : " + scoretotal));
                     chrono.setBase(SystemClock.elapsedRealtime());
                     chrono.start();
                     et.setText("");
                     st = strings1[rand.nextInt(strings1.length)];
                     tv.setText(st);
-                } else if (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score2 > 3) { // 4점 이상
+                } else if (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score2 >= 5) { // 5점 이상
                     stage = 3;
                     tvStage.setText("3단계 : 긴 문장");
+                    tvScore.setText(String.format("3단계 점수: " + score3 + "점 / 총점 : " + scoretotal));
                     chrono.setBase(SystemClock.elapsedRealtime());
                     chrono.start();
                     et.setText("");
                     st = strings2[rand.nextInt(strings2.length)];
                     tv.setText(st);
-                } else if (sCurrentTime.equals("경과시간:00:30") && stage == 1 && score3 <= 4) { // 3점 이하
+                } else if (sCurrentTime.equals("경과시간:00:30") && stage == 1 && score3 <= 7) { // 3점 이하
                     chrono.stop();
                     gaming = false;
                     tv.setText("게임이 끝났습니다!");
                     stage = 0;
+                    tvScore.setTextColor(Color.GRAY);
+                    chrono.setTextColor(Color.BLACK);
                     btnStart.setVisibility(View.VISIBLE);
                     Toast ts = Toast.makeText(getApplicationContext(),"게임이 끝났습니다!", Toast.LENGTH_SHORT);
                     ts.show();
-                } else if (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score3 <= 3) { // 3점 이하
+                } else if (sCurrentTime.equals("경과시간:01:00") && stage == 2 && score3 <= 4) { // 4점 이하
                     chrono.stop();
                     gaming = false;
                     tv.setText("게임이 끝났습니다!");
                     stage = 0;
+                    tvScore.setTextColor(Color.GRAY);
+                    chrono.setTextColor(Color.BLACK);
                     btnStart.setVisibility(View.VISIBLE);
                     Toast ts = Toast.makeText(getApplicationContext(), "게임이 끝났습니다!", Toast.LENGTH_SHORT);
                     ts.show();
@@ -121,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
                     gaming = false;
                     tv.setText("게임이 끝났습니다!");
                     stage = 0;
+                    tvScore.setTextColor(Color.GRAY);
+                    chrono.setTextColor(Color.BLACK);
                     btnStart.setVisibility(View.VISIBLE);
                     Toast ts = Toast.makeText(getApplicationContext(), "게임이 끝났습니다!", Toast.LENGTH_SHORT);
                     ts.show();
@@ -140,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(st);
                 if (et.getText().toString().equals(st) && gaming == true) {
                     Toast.makeText(MainActivity.this, "정답!", Toast.LENGTH_SHORT).show(); // 토스트 표출
-
 
                     tvScore.setTextColor(Color.RED);
                     et.setText("");
@@ -192,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
                     score2 = 0;
                     score3 = 0;
                     scoretotal = 0;
+                    tvScore.setText(String.format("1단계 점수: " + score1 + "점 / 총점 : " + scoretotal));
+                    tvScore.setTextColor(Color.RED);
                     et.setText("");
                     st = words[rand.nextInt(words.length)];
                     tv.setText(st);
@@ -209,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
                     chrono.stop();
                     gaming=false;
                     tv.setText("게임을 종료했습니다!");
+                    tvScore.setTextColor(Color.GRAY);
+                    chrono.setTextColor(Color.BLACK);
                     btnStart.setVisibility(View.VISIBLE);
                     stage = 0;
                     // tvScore.setText("점수");
@@ -218,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
             case R.id.btnHelp:
-                msg = "게임으로 타자실력을 확인해 봅시다! \n\n중간에 나오는 단어나 문장을 동일하게 입력하시면 1점을 득점합니다. \n\n총 3단계로 이루어져 있으며, 각 단계에는 제한시간이 존재합니다. \n\n제한시간 내에 일정한 점수를 득점하셔야 다음 단계로 넘어갈 수 있습니다. \n\n1단계: 30초/5점\n2단계: 60초/3점\n3단계: 90초";
+                msg = "게임으로 타자실력을 확인해 봅시다! \n\n중간에 나오는 단어나 문장을 동일하게 입력하시면 1점을 득점합니다. \n\n총 3단계로 이루어져 있으며, 각 단계에는 제한시간이 존재합니다. \n\n제한시간 내에 일정한 점수를 득점하셔야 다음 단계로 넘어갈 수 있습니다. \n\n1단계: 30초/8점\n2단계: 60초/5점\n3단계: 90초";
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("게임 방법").setMessage(msg);
 
